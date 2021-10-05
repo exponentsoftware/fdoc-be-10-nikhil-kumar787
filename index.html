@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      content=""
+      author=""
+    />
+
+    <title>Razorpay</title>
+  </head>
+
+  <body>
+    <hr />
+    <h3>Todo Pyment</h3>
+
+    <span>
+      Cost:- 499 Rupees
+      <button id="pay-button">Pay Now & Get Access</button>
+    </span>
+    <hr />
+
+    
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+      var options = {
+        key: "rzp_test_0w11SU3yCX3CZZ",
+        amount: "49900",
+        currency: "INR",
+        name: "Testing",
+        description: "Pay & Checkout",
+        order_id: "order_I5dpqovhDTBW5M",
+        handler: function (response) {
+          console.log(response);
+          alert("This step of Payment Succeeded");
+        },
+
+        theme: {
+          color: "#2300a3",
+        },
+      };
+      var razorpayObject = new Razorpay(options);
+      console.log(razorpayObject);
+      razorpayObject.on("payment.failed", function (response) {
+        console.log(respone);
+        alert("This step of Payment Failed");
+      });
+
+      document.getElementById("pay-button").onclick = function (e) {
+        razorpayObject.open();
+        e.preventDefault();
+      };
+    </script>
+  </body>
+</html>
